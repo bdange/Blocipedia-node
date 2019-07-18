@@ -1,0 +1,19 @@
+{
+  "name": "blocipedia-node",
+  "version": "1.0.0",
+  "description": "A Wikipedia-like application",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "export NODE_ENV=test&& jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bdange/Blocipedia-node.git"
+  },
+  "author": "Benjamin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bdange/Blocipedia-node/issues"
+  },
+  "homepage": "https://github.com/bdange/Blocipedia-node#readme"
+}
