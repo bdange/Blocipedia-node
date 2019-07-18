@@ -4,16 +4,31 @@
   "description": "A Wikipedia-like application",
   "main": "src/server.js",
   "scripts": {
-    "test": "export NODE_ENV=test&& jasmine"
+    "test": "export NODE_ENV=test&& jasmine",
+    "start": "node src/server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bdange/Blocipedia-node.git"
+  "devDependencies": {
+    "faker": "^4.1.0",
+    "jasmine": "^3.4.0",
+    "request": "^2.88.0"
   },
-  "author": "Benjamin",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bdange/Blocipedia-node/issues"
-  },
-  "homepage": "https://github.com/bdange/Blocipedia-node#readme"
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.0.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.16.2",
+    "express-validator": "^6.1.1",
+    "heroku": "^7.26.2",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pg": "^7.11.0",
+    "pg-hstore": "^2.3.3",
+    "psql": "0.0.1",
+    "sequelize": "^5.10.1",
+    "sequelize-cli": "^5.5.0"
+  }
 }
