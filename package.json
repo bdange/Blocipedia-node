@@ -10,8 +10,7 @@
   "devDependencies": {
     "faker": "^4.1.0",
     "jasmine": "^3.4.0",
-    "request": "^2.88.0",
-    "sequelize-cli": "^5.5.0"
+    "request": "^2.88.0"
   },
   "dependencies": {
     "@sendgrid/mail": "^6.4.0",
