@@ -19,7 +19,7 @@ module.exports = {
       .then(user => {
         const msg = {
           to: newUser.email,
-          from: "test@example.com",
+          from: "testUser@example.com",
           subject: "New user confirmation",
           text: "Welcome to Blocipedia!",
           html: "<strong>and a new world of Wikis</strong>"
