@@ -4,21 +4,21 @@
     "password": null,
     "database": "database_development",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
     "password": null,
     "database": "database_test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
     "password": null,
     "database": "database_production",
     "host": "127.0.0.1",
-    "dialect": "mysql",
+    "dialect": "postgres",
     "db": "process.env.postgres://oarijkszlxrvbn:6e41f39111da2ae13631dac1a732a0bf9e7cf4c9b19ae1b41ece4efddc915416@ec2-107-21-216-112.compute-1.amazonaws.com:5432/demil7un1oboq2"
   }
 }
