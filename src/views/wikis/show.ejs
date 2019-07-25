@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+      <h1><%= wiki.title %></h1>
+      <p><%= wiki.description %></p>
+    </main>
+    <% include ../static/partials/baseScript.ejs %>
+  </body>
+</html>
