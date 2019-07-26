@@ -33,9 +33,9 @@ module.exports = {
         onDelete: "CASCADE",
         allowNull: false,
         references: {
-          model: "Users",
+          model: "Wikis",
           key: "id",
-          as: "userId"
+          as: "wikiId"
         }
       }
     });

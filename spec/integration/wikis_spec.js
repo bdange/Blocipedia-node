@@ -3,24 +3,35 @@ const server = require("../../src/server");
 const base = "http://localhost:3000/wikis/";
 const sequelize = require("../../src/db/models").sequelize;
 const Wiki = require("../../src/db/models").Wiki;
+const User = require("../../src/db/models").User;
 
 describe("routes : wikis", () => {
   beforeEach(done => {
     this.wiki;
+    this.user;
 
     sequelize.sync({ force: true }).then(res => {
-      Wiki.create({
-        title: "JS Frameworks",
-        body: "There is a lot of them"
-      })
-        .then(wiki => {
-          this.wiki = wiki;
-          done();
+      User.create({
+        username: "user_name",
+        email: "user@gmail.com",
+        password: "123456"
+      }).then(user => {
+        this.user = user;
+
+        Wiki.create({
+          title: "JS Frameworks",
+          body: "There is a lot of them",
+          userId: this.user.id
         })
-        .catch(err => {
-          console.log(err);
-          done();
-        });
+          .then(wiki => {
+            this.wiki = wiki;
+            done();
+          })
+          .catch(err => {
+            console.log(err);
+            done();
+          });
+      });
     });
   });
 
