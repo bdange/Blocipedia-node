@@ -4,14 +4,14 @@ module.exports = {
   index(req, res, next) {
     wikiQueries.getAllWikis((err, wikis) => {
       if (err) {
-        res.redirect(500, "static/index");
+        res.redirect(500, "/static/index");
       } else {
-        res.redirect("wikis/index", { wikis });
+        res.redirect("/wikis/index", { wikis });
       }
     });
   },
   new(req, res, next) {
-    res.render("wikis/new");
+    res.render("/wikis/new");
   },
   create(req, res, next) {
     let newWiki = {
@@ -31,7 +31,7 @@ module.exports = {
       if (err || wiki == null) {
         res.redirect(404, "/");
       } else {
-        res.render("wikis/show", { wiki });
+        res.render("/wikis/show", { wiki });
       }
     });
   },
@@ -49,7 +49,7 @@ module.exports = {
       if (err || wiki == null) {
         res.redirect(404, "/");
       } else {
-        res.render("wikis/edit", { wiki });
+        res.render("/wikis/edit", { wiki });
       }
     });
   },
