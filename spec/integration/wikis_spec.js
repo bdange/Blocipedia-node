@@ -7,10 +7,11 @@ const Wiki = require("../../src/db/models").Wiki;
 describe("routes : wikis", () => {
   beforeEach(done => {
     this.wiki;
+
     sequelize.sync({ force: true }).then(res => {
       Wiki.create({
         title: "JS Frameworks",
-        description: "There is a lot of them"
+        body: "There is a lot of them"
       })
         .then(wiki => {
           this.wiki = wiki;
@@ -50,7 +51,7 @@ describe("routes : wikis", () => {
       url: `${base}create`,
       form: {
         title: "blink-182 songs",
-        description: "What's your favorite blink-182 song?"
+        body: "What's your favorite blink-182 song?"
       }
     };
 
@@ -60,9 +61,7 @@ describe("routes : wikis", () => {
           .then(wiki => {
             expect(res.statusCode).toBe(303);
             expect(wiki.title).toBe("blink-182 songs");
-            expect(wiki.description).toBe(
-              "What's your favorite blink-182 song?"
-            );
+            expect(wiki.body).toBe("What's your favorite blink-182 song?");
             done();
           })
           .catch(err => {
@@ -79,6 +78,54 @@ describe("routes : wikis", () => {
         expect(err).toBeNull();
         expect(body).toContain("JS Frameworks");
         done();
+      });
+    });
+  });
+
+  describe("POST /wikis/:id/destroy", () => {
+    it("should delete the wiki with the associated ID", done => {
+      Wiki.all().then(wikis => {
+        const wikiCountBeforeDelete = wikis.length;
+        expect(wikiCountBeforeDelete).toBe(1);
+        request.wiki(`${base}${this.wiki.id}/destroy`, (err, res, body) => {
+          Wiki.all().then(wikis => {
+            expect(err).toBeNull();
+            expect(wikis.length).toBe(wikiCountBeforeDelete - 1);
+            done();
+          });
+        });
+      });
+    });
+  });
+
+  describe("GET /wikis/:id/edit", () => {
+    it("should render a view with an edit wiki form", done => {
+      request.get(`${base}${this.wiki.id}/edit`, (err, res, body) => {
+        expect(err).toBeNull();
+        expect(body).toContain("Edit Wiki");
+        expect(body).toContain("JS Frameworks");
+        done();
+      });
+    });
+  });
+
+  describe("POST /wikis/:id/update", () => {
+    it("should update the wiki with the given values", done => {
+      const options = {
+        url: `${base}${this.topic.id}/update`,
+        form: {
+          title: "JavaScript Frameworks",
+          body: "There are a lot of them"
+        }
+      };
+      request.post(options, (err, res, body) => {
+        expect(err).toBeNull();
+        Wiki.findOne({
+          where: { id: this.wiki.id }
+        }).then(wiki => {
+          expect(wiki.title).toBe("Javascript Frameworks");
+          done();
+        });
       });
     });
   });
