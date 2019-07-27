@@ -1,6 +1,15 @@
 const Wiki = require("./models").Wiki;
 
 module.exports = {
+  getAllWikis(callback) {
+    return Wiki.findAll()
+      .then(wikis => {
+        callback(null, wikis);
+      })
+      .catch(err => {
+        callback(err);
+      });
+  },
   addWiki(newWiki, callback) {
     return Wiki.create({
       title: newWiki.title,
@@ -13,15 +22,7 @@ module.exports = {
         callback(err);
       });
   },
-  getAllWikis(callback) {
-    return Wiki.findAll()
-      .then(wikis => {
-        callback(null, wikis);
-      })
-      .catch(err => {
-        callback(err);
-      });
-  },
+
   getWiki(id, callback) {
     return Wiki.findByPk(id, {
       include: [
