@@ -4,9 +4,10 @@ module.exports = {
   index(req, res, next) {
     wikiQueries.getAllWikis((err, wikis) => {
       if (err) {
-        res.redirect(500, "/static/index");
+        //console.log("this is the error" + err);
+        res.redirect(500, "static/index");
       } else {
-        res.redirect("/wikis/index", { wikis });
+        res.redirect("wikis/index", { wikis });
       }
     });
   },
