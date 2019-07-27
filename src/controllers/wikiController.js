@@ -12,16 +12,16 @@ module.exports = {
     });
   },
   new(req, res, next) {
-    res.render("/wikis/new");
+    res.render("wikis/new");
   },
   create(req, res, next) {
     let newWiki = {
       title: req.body.title,
-      body: req.body.description
+      description: req.body.description
     };
     wikiQueries.addWiki(newWiki, (err, wiki) => {
       if (err) {
-        res.redirect(500, "/wikis/new");
+        res.redirect(500, "wikis/new");
       } else {
         res.redirect(303, `/wikis/${wiki.id}`);
       }
@@ -32,7 +32,7 @@ module.exports = {
       if (err || wiki == null) {
         res.redirect(404, "/");
       } else {
-        res.render("/wikis/show", { wiki });
+        res.render("wikis/show", { wiki });
       }
     });
   },
