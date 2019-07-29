@@ -4,7 +4,7 @@ module.exports = {
   index(req, res, next) {
     wikiQueries.getAllWikis((err, wikis) => {
       if (err) {
-        console.log("this is the error" + err);
+        console.log("this is the error", err);
         res.redirect(500, "static/index");
       } else {
         res.render("wikis/index", { wikis });
@@ -15,10 +15,15 @@ module.exports = {
     res.render("wikis/new");
   },
   create(req, res, next) {
+    console.log(req);
+    console.log(req.user);
     let newWiki = {
       title: req.body.title,
-      description: req.body.description
+      body: req.body.body,
+      userId: req.user.id
     };
+    console.log(req.body);
+    console.log(newWiki);
     wikiQueries.addWiki(newWiki, (err, wiki) => {
       if (err) {
         res.redirect(500, "wikis/new");
@@ -39,7 +44,7 @@ module.exports = {
   destroy(req, res, next) {
     wikiQueries.deleteWiki(req.params.id, (err, wiki) => {
       if (err) {
-        res.redirect(500, `/wikis/${req.params.id}`);
+        res.redirect(500, `/wikis/${wiki.id}`);
       } else {
         res.redirect(303, "/wikis");
       }
@@ -50,13 +55,13 @@ module.exports = {
       if (err || wiki == null) {
         res.redirect(404, "/");
       } else {
-        res.render("/wikis/edit", { wiki });
+        res.render("wikis/edit", { wiki });
       }
     });
   },
   update(req, res, next) {
-    wikiQueries.updateWiki(req.params.id, req.body, (err, topic) => {
-      if (err || topic == null) {
+    wikiQueries.updateWiki(req.params.id, req.body, (err, wiki) => {
+      if (err || wiki == null) {
         res.redirect(404, `/wikis/${req.params.id}/edit`);
       } else {
         res.redirect(`/wikis/${wiki.id}`);

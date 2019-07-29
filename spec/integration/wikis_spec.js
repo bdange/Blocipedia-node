@@ -21,7 +21,7 @@ describe("routes : wikis", () => {
         Wiki.create({
           title: "JS Frameworks",
           body: "There is a lot of them",
-          userId: this.user.id
+          userId: user.id
         })
           .then(wiki => {
             this.wiki = wiki;
@@ -94,7 +94,7 @@ describe("routes : wikis", () => {
 
     describe("POST /wikis/:id/destroy", () => {
       it("should delete the wiki with the associated ID", done => {
-        Wiki.all().then(wikis => {
+        Wiki.findAll().then(wikis => {
           const wikiCountBeforeDelete = wikis.length;
           expect(wikiCountBeforeDelete).toBe(1);
           request.wiki(`${base}${this.wiki.id}/destroy`, (err, res, body) => {

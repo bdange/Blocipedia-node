@@ -11,29 +11,25 @@ module.exports = {
       });
   },
   addWiki(newWiki, callback) {
+    console.log("Hitting the addwiki function");
     return Wiki.create({
       title: newWiki.title,
-      body: newWiki.body
+      body: newWiki.body,
+      userId: newWiki.userId
     })
       .then(wiki => {
+        console.log("successfully addded up", wiki);
         callback(null, wiki);
       })
       .catch(err => {
+        console.log("Failed to added up", err);
         callback(err);
       });
   },
-
   getWiki(id, callback) {
-    return Wiki.findByPk(id, {
-      include: [
-        {
-          model: Wiki,
-          as: "wikis"
-        }
-      ]
-    })
-      .then(topic => {
-        callback(null, topic);
+    return Wiki.findByPk(id)
+      .then(wiki => {
+        callback(null, wiki);
       })
       .catch(err => {
         callback(err);

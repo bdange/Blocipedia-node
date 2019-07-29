@@ -17,8 +17,7 @@ describe("Wiki", () => {
 
         Wiki.create({
           title: "Studying at Bloc",
-          body: "This is quite a committment to say the least.",
-          userId: this.user.id
+          body: "This is quite a committment to say the least."
         }).then(wiki => {
           this.wiki = wiki;
           done();
