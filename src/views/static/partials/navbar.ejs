@@ -22,6 +22,10 @@
         </li>
         <% if(currentUser) { %>
         <li class="nav-item">
+
+          <a class="nav-link" href="/users/<%= currentUser.id %>">Profile</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/users/sign_out">Sign out</a>
         </li>
         <% } else { %>
@@ -35,6 +39,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/wikis">Wikis</a>
         </li>
+
       </ul>
     </div>
   </div>
