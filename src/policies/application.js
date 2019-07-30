@@ -36,7 +36,7 @@ module.exports = class ApplicationPolicy {
     return (
       this.new() &&
       this.record &&
-      (this._isStandard() || this._isOwner() || this._isPremium())
+      (this._isStandard() || this._isAdmin() || this._isPremium())
     );
   }
 

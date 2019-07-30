@@ -58,7 +58,9 @@ module.exports = {
       if (!wiki) {
         return callback("Wiki not found");
       }
+
       const authorized = new Authorizer(req.user, wiki).update();
+
       if (authorized) {
         wiki
           .update(updatedWiki, {

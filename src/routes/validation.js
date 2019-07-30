@@ -25,10 +25,6 @@ module.exports = {
   validateWikis(req, res, next) {
     if (req.method === "POST") {
       req
-        .checkParams("wikiId", "must be valid")
-        .notEmpty()
-        .isInt();
-      req
         .checkBody("title", "must be at leat 4 characters in length")
         .isLength({ min: 4 });
       req
