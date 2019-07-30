@@ -1,4 +1,5 @@
 const Wiki = require("./models").Wiki;
+const Authorizer = require("../policies/wiki");
 
 module.exports = {
   getAllWikis(callback) {
@@ -53,6 +54,7 @@ module.exports = {
         callback(err);
       });
   },
+
   updateWiki(req, updatedWiki, callback) {
     return Wiki.findByPk(req.params.id).then(wiki => {
       if (!wiki) {

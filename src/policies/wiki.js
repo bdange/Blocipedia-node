@@ -2,7 +2,12 @@ const ApplicationPolicy = require("./application");
 
 module.exports = class WikiPolicy extends ApplicationPolicy {
   new() {
-    return this._isStandard() || this._isAdmin() || this._isPremium();
+    return (
+      this._isOwner() ||
+      this._isStandard() ||
+      this._isAdmin() ||
+      this._isPremium()
+    );
   }
 
   create() {
