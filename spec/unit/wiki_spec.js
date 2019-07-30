@@ -51,7 +51,7 @@ describe("Wiki", () => {
           done();
         })
         .catch(err => {
-          expect(err.message).toContain("Wiki body cannot be null");
+          expect(err.message).toContain("Wiki.body cannot be null");
           done();
         });
     });
