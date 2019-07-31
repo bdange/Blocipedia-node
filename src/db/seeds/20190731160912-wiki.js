@@ -9,7 +9,7 @@ let wikis = [
     private: false,
     createdAt: new Date(),
     updatedAt: new Date(),
-    userId: 1
+    userId: 14
   },
   {
     title: faker.hacker.noun(),
@@ -17,7 +17,7 @@ let wikis = [
     private: false,
     createdAt: new Date(),
     updatedAt: new Date(),
-    userId: 2
+    userId: 15
   }
 ];
 

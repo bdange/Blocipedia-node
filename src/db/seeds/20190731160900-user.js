@@ -2,6 +2,7 @@
 
 let users = [
   {
+    id: 14,
     username: "user1",
     email: "user1@gmail.com",
     password: "password1",
@@ -10,6 +11,7 @@ let users = [
     role: "standard"
   },
   {
+    id: 15,
     username: "user2",
     email: "user2@gmail.com",
     password: "password2",
