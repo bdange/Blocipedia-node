@@ -80,6 +80,20 @@ describe("routes : wikis", () => {
             });
         });
       });
+
+      it("should not create a new wiki that fails validation", done => {
+        const options = {
+          url: `${base}/${this.wiki.id}/create`,
+          form: {
+            title: "a",
+            body: "b"
+          }
+        };
+        request.post(options, (err, res, body) => {
+          Wiki.findOne({ where: { title: "a" } }).then(wiki.toBeNull());
+          done();
+        });
+      });
     });
 
     describe("GET /wikis/:id", () => {
