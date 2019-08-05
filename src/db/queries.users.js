@@ -1,7 +1,7 @@
 const User = require("./models").User;
 const bcrypt = require("bcryptjs");
-const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+//const sgMail = require("@sendgrid/mail");
+//sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 module.exports = {
   // #2
@@ -30,6 +30,32 @@ module.exports = {
       })
       .catch(err => {
         callback(err);
+      });
+  },
+  upgrade(id) {
+    return User.findByPk(id)
+      .then(user => {
+        if (!user) {
+          return callback("User does not exist!");
+        } else {
+          return user.update({ role: "premium" });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
+  downgrade(id) {
+    return User.findByPk(id)
+      .then(user => {
+        if (!user) {
+          return callback("User does not exist!");
+        } else {
+          return user.update({ role: "standard" });
+        }
+      })
+      .catch(err => {
+        console.log(err);
       });
   }
 };
