@@ -54,7 +54,7 @@ module.exports = {
   },
 
   upgrade(req, res, next) {
-    res.render("users/upgrade_downgrade", { publishableKey });
+    res.render("users/upgrade", { publishableKey });
   },
 
   payment(req, res, next) {
