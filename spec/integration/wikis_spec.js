@@ -61,7 +61,9 @@ describe("routes : wikis", () => {
         url: `${base}create`,
         form: {
           title: "blink-182 songs",
-          body: "What's your favorite blink-182 song?"
+          body: "What's your favorite blink-182 song?",
+          private: true,
+          userId: this.user.id
         }
       };
 

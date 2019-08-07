@@ -1,4 +1,5 @@
 const userQueries = require("../db/queries.users.js");
+const wikiQueries = require("../db/queries.wikis.js");
 const passport = require("passport");
 const secretKey = process.env.SECRET_KEY;
 const publishableKey = process.env.PUBLISHABLE_KEY;
@@ -80,6 +81,7 @@ module.exports = {
 
   downgrade(req, res, next) {
     userQueries.downgrade(req.user.dataValues.id);
+    wikiQueries.downgradePrivateWikis(req.user.dataValues.id);
     req.flash("notice", "You are no longer a premium user!");
     res.redirect("/");
   }
