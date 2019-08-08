@@ -67,11 +67,11 @@ module.exports = {
     });
   },
   destroy(req, res, next) {
-    wikiQueries.deleteWiki(req, (err, wiki) => {
+    wikiQueries.deleteWiki(eq.params.id, (err, wiki) => {
       if (err) {
-        res.redirect(500, `/wikis/${req.params.id}`);
+        res.redirect(500, `/wikis/${wiki.id}`);
       } else {
-        res.redirect(303, "/wikis");
+        res.redirect(303, "/");
       }
     });
   },
