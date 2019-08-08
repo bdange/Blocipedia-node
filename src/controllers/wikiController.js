@@ -67,7 +67,11 @@ module.exports = {
     });
   },
   destroy(req, res, next) {
+<<<<<<< HEAD
     wikiQueries.deleteWiki(req.params.id, (err, wiki) => {
+=======
+    wikiQueries.deleteWiki(req.params.id, (err, wiki) => {
+>>>>>>> checkpoint-markdown
       if (err) {
         res.redirect(500, `/wikis/${wiki.id}`);
       } else {
