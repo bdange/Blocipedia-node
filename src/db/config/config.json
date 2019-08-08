@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": null,
-    "database": "blocipedia-node-dev",
+    "database": "blocipedia-dev",
     "host": "127.0.0.1",
     "logging": false,
     "dialect": "postgres"
@@ -10,7 +10,7 @@
   "test": {
     "username": "postgres",
     "password": null,
-    "database": "blocipedia-node-test",
+    "database": "blocipedia-test",
     "host": "127.0.0.1",
     "logging": false,
     "dialect": "postgres"

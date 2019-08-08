@@ -4,7 +4,7 @@ const markdown = require("markdown").markdown;
 
 module.exports = {
   publicIndex(req, res, next) {
-    wikiQueries.getAllWikis((err, wikis) => {
+    wikiQueries.getAllPublicWikis((err, wikis) => {
       if (err) {
         console.log("this is the error", err);
         res.redirect(500, "static/index");
@@ -14,7 +14,7 @@ module.exports = {
     });
   },
   privateIndex(req, res, next) {
-    wikiQueries.getAllWikis((err, wikis) => {
+    wikiQueries.getAllPrivateWikis((err, wikis) => {
       if (err) {
         res.redirect(500, "static/index");
       } else {
@@ -67,7 +67,7 @@ module.exports = {
     });
   },
   destroy(req, res, next) {
-    wikiQueries.deleteWiki(eq.params.id, (err, wiki) => {
+    wikiQueries.deleteWiki(req.params.id, (err, wiki) => {
       if (err) {
         res.redirect(500, `/wikis/${wiki.id}`);
       } else {
