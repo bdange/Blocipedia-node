@@ -28,9 +28,15 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "userId",
       as: "wikis"
     });
-  };
-  User.prototype.isAdmin = function() {
-    return this.role === "admin";
+    User.prototype.isAdmin = function() {
+      return this.role === "admin";
+    };
+    User.prototype.isOwner = function() {
+      return this.role === "owner";
+    };
+    User.prototype.isStandard = function() {
+      return this.role === "standard";
+    };
   };
   return User;
 };

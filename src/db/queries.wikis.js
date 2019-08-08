@@ -2,8 +2,25 @@ const Wiki = require("./models").Wiki;
 const Authorizer = require("../policies/wiki");
 
 module.exports = {
-  getAllWikis(callback) {
-    return Wiki.findAll()
+  getAllPublicWikis(callback) {
+    return Wiki.findAll({
+      where: {
+        private: "false"
+      }
+    })
+      .then(wikis => {
+        callback(null, wikis);
+      })
+      .catch(err => {
+        callback(err);
+      });
+  },
+  getAllPrivateWikis(callback) {
+    return Wiki.findAll({
+      where: {
+        private: "true"
+      }
+    })
       .then(wikis => {
         callback(null, wikis);
       })
@@ -16,6 +33,7 @@ module.exports = {
     return Wiki.create({
       title: newWiki.title,
       body: newWiki.body,
+      private: newWiki.private,
       userId: newWiki.userId
     })
       .then(wiki => {
@@ -37,18 +55,12 @@ module.exports = {
       });
   },
 
-  deleteWiki(req, callback) {
-    return Wiki.findByPk(req.params.id)
+  deleteWiki(id, callback) {
+    return Wiki.destroy({
+      where: { id }
+    })
       .then(wiki => {
-        const authorized = new Authorizer(req.user, wiki).destroy();
-        if (authorized) {
-          wiki.destroy().then(res => {
-            callback(null, wiki);
-          });
-        } else {
-          req.flash("notice", "You are not authorized to do that.");
-          callback(401);
-        }
+        callback(null, wiki);
       })
       .catch(err => {
         callback(err);
@@ -79,5 +91,21 @@ module.exports = {
         callback("Forbidden");
       }
     });
+  },
+
+  downgradePrivateWikis(id) {
+    return Wiki.findAll()
+      .then(wikis => {
+        wikis.forEach(wiki => {
+          if (wiki.userId == id && wiki.private == true) {
+            wiki.update({
+              private: false
+            });
+          }
+        });
+      })
+      .catch(err => {
+        callback(err);
+      });
   }
 };
