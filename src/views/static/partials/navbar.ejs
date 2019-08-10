@@ -20,7 +20,7 @@
             <span class="sr-only">(current)</span>
           </a>
         </li>
-        <% if(currentUser && currentUser.role != "standard") { %>
+        <% if(currentUser && currentUser.role == "premium") { %>
         <li class="nav-item">
           <a class="nav-link" href="/wikis/public">Public Wikis</a>
         </li>
@@ -29,10 +29,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/users/downgrade">Downgrade</a>
-        </li>
-        <li class="nav-item">
-
-          <a class="nav-link" href="/users/<%= currentUser.id %>">Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/users/sign_out">Sign out</a>
