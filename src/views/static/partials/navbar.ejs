@@ -15,15 +15,15 @@
 
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <% if(currentUser) { %>
+        <% if(currentUser && currentUser.role != "standard") { %>
         <li class="nav-item">
-          <a class="nav-link" href="/wikis">Wikis</a>
+          <a class="nav-link" href="/wikis/public">Public Wikis</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/wikis/private">Private Wikis</a>
         </li>
         <li>
-          <a class="nav-link" href="/users/collaborators">Collaborator</a>
+          <a class="nav-link" href="/users/collaborations">Collaborations</a>
         </li>
         <li>
           <a class="nav-link" href="/users/upgrade">Downgrade Membership</a>
@@ -31,27 +31,22 @@
         <li>
           <a class="nav-link" href="/users/sign_out">Sign out</a>
         </li>
-        <% } else if(currentUser) { %>
-        <li>
-          <a class="nav-link" href="/users/upgrade">Premium Membership</a>
+        <% } else if(currentUser && currentUser.role == "standard") { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/wikis/public">Public Wikis</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/wikis">Wikis</a>
+          <a class="nav-link" href="/wikis/private">Private Wikis</a>
+        </li>
+        <li>
+          <a class="nav-link" href="/users/collaborations">Collaborations</a>
+        </li>
+        <li>
+          <a class="nav-link" href="/users/upgrade">Premium Membership</a>
         </li>
         <li>
           <a class="nav-link" href="/users/sign_out">Sign out</a>
         </li>
-        <% } else { %>
-        <li class="nav-item">
-          <a class="nav-link" href="/users/sign_up">Sign up</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/users/sign_in">Sign in</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/wikis">Wikis</a>
-        </li>
-      </ul>
       <% }%>
     </div>
   </div>
