@@ -1,4 +1,5 @@
 const Wiki = require("./models").Wiki;
+const Collaborator = require("./models").Collaborator;
 const Authorizer = require("../policies/wiki");
 
 module.exports = {
@@ -15,6 +16,7 @@ module.exports = {
         callback(err);
       });
   },
+
   getAllPrivateWikis(callback) {
     return Wiki.findAll({
       where: {
@@ -28,36 +30,33 @@ module.exports = {
         callback(err);
       });
   },
+
+  getWiki(id, callback) {
+    let result = {};
+    return Wiki.findByPk(id).then(wiki => {
+      if (!wiki) {
+        callback(404);
+      } else {
+        result["wiki"] = wiki;
+        Collaborator.scope({ method: ["collaboratorsFor", id] })
+          .findAll()
+          .then(collaborators => {
+            result["collaborators"] = collaborators;
+            callback(null, result);
+          })
+          .catch(err => {
+            callback(err);
+          });
+      }
+    });
+  },
+
   addWiki(newWiki, callback) {
-    console.log("Hitting the addwiki function");
     return Wiki.create({
       title: newWiki.title,
       body: newWiki.body,
       private: newWiki.private,
       userId: newWiki.userId
-    })
-      .then(wiki => {
-        console.log("successfully addded up", wiki);
-        callback(null, wiki);
-      })
-      .catch(err => {
-        console.log("Failed to added up", err);
-        callback(err);
-      });
-  },
-  getWiki(id, callback) {
-    return Wiki.findByPk(id)
-      .then(wiki => {
-        callback(null, wiki);
-      })
-      .catch(err => {
-        callback(err);
-      });
-  },
-
-  deleteWiki(id, callback) {
-    return Wiki.destroy({
-      where: { id }
     })
       .then(wiki => {
         callback(null, wiki);
@@ -91,6 +90,18 @@ module.exports = {
         callback("Forbidden");
       }
     });
+  },
+
+  deleteWiki(id, callback) {
+    return Wiki.destroy({
+      where: { id }
+    })
+      .then(wiki => {
+        callback(null, wiki);
+      })
+      .catch(err => {
+        callback(err);
+      });
   },
 
   downgradePrivateWikis(id) {
