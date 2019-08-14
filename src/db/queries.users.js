@@ -68,6 +68,7 @@ module.exports = {
           .findAll()
           .then(collaborations => {
             result["collaborations"] = collaborations;
+            console.log(collaborations);
             callback(null, result);
           })
           .catch(err => {
