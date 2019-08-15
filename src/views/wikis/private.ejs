@@ -11,10 +11,11 @@
 
       <h1>Private Wikis</h1>
 
-      <% if(currentUser) { %>
+      <% if(currentUser && currentUser.role != "standard") { %>
       <a href="/wikis/new" class="btn btn-success">New Wiki</a>
+      <% } else if(currentUser && currentUser.role == "standard") { %>
+      <a href="/users/upgrade" class="btn btn-danger">Upgrade to Premium</a>
       <% } %>
-
       <ul class="list-group">
         <% wikis.forEach((wiki) => { %>
         <li class="list-group-item">

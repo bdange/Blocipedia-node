@@ -9,8 +9,9 @@
     <main class="container">
         <% include ../static/partials/messages.ejs %>
       <h1><%= wiki.title %></h1>
-      <% if(currentUser) { %>
+      <% if(currentUser && currentUser.role != "standard") { %>
       <a href="/wikis/new" class="btn btn-success">New Wiki</a>
+      <% } else if(currentUser) { %>
       <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit</a>
       <form
         style="display:initial"
