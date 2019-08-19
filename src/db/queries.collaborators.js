@@ -8,6 +8,8 @@ module.exports = {
     if (req.user.username == req.body.collaborator) {
       return callback("Cannot add yourself to collaborators!");
     }
+    console.log("WIKI ID Here: " + req.params.wikiId);
+
     User.findAll({
       where: {
         username: req.body.collaborator
@@ -35,6 +37,7 @@ module.exports = {
               userId: users[0].id,
               wikiId: req.params.wikiId
             };
+
             return Collaborator.create(newCollaborator)
               .then(collaborator => {
                 callback(null, collaborator);

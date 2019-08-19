@@ -89,11 +89,11 @@ module.exports = {
   showCollaborations(req, res, next) {
     userQueries.getUser(req.user.id, (err, result) => {
       user = result["user"];
-      collaborations = result["collaborations"];
+      collaborator = result["collaborator"];
       if (err || user == null) {
         res.redirect(404, "/");
       } else {
-        res.render("users/collaborations", { user, collaborations });
+        res.render("users/collaborations", { collaborator });
       }
     });
   }

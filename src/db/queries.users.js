@@ -64,11 +64,10 @@ module.exports = {
         callback(404);
       } else {
         result["user"] = user;
-        Collaborator.scope({ method: ["collaborationsFor", id] })
+        Collaborator.scope({ method: ["collaboratorFor", id] })
           .findAll()
           .then(collaborations => {
-            result["collaborations"] = collaborations;
-            console.log(collaborations);
+            result["collaborator"] = collaborator;
             callback(null, result);
           })
           .catch(err => {

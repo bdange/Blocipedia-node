@@ -12,12 +12,13 @@
 
             <h1>Collaborations</h1>
 
-            <% if(collaborations.length > 0) { %>
+            <% if(collaborator.length > 0) { %>
                 <p>
                     <ul class="list-group">
-                        <% collaborations.forEach((collaboration) => { %>
+                        <% collaborator.forEach((collaborators) => { %>
                             <li class="list-group-item">
-                                <a href="/wikis/<%= collaboration.Wiki.id %>"><%= collaboration.Wiki.title %></a>
+                                
+                                <a href="/wikis/<%= collaborators.id %>"><%= collaborators.Wiki.title %> </a>
                             </li>
                      <%   }) %>
                     </ul>
