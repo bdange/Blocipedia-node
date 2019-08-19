@@ -88,12 +88,15 @@ module.exports = {
 
   showCollaborations(req, res, next) {
     userQueries.getUser(req.user.id, (err, result) => {
-      user = result["user"];
-      collaborator = result["collaborator"];
       if (err || user == null) {
+        console.log("THIS IS THE ERROR: " + err);
         res.redirect(404, "/");
       } else {
-        res.render("users/collaborations", { collaborator });
+        user = result["user"];
+        collaborator = result["collaborator"];
+        {
+          res.render("users/collaborations", { collaborator });
+        }
       }
     });
   }

@@ -66,7 +66,7 @@ module.exports = {
         result["user"] = user;
         Collaborator.scope({ method: ["collaboratorFor", id] })
           .findAll()
-          .then(collaborations => {
+          .then(collaborator => {
             result["collaborator"] = collaborator;
             callback(null, result);
           })
