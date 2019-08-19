@@ -19,6 +19,12 @@
       >
         <button type="submit" class="btn btn-danger">Delete</button>
       </form>     <% } %>
+      <% if(currentUser && (currentUser.id == wiki.userId || currentUser &&
+      currentUser.isAdmin())) { %>
+      <a href="/wikis/<%= wiki.id %>/collaborators" class="btn btn-info"
+        >Edit Collaborators</a
+      >
+      <% } %>
       <p><%- wiki.body %></p>
 
       </ul>

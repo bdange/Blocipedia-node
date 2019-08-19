@@ -21,13 +21,13 @@
         <% }) %>
       <% } else if(currentUser && currentUser.role == "standard") { %>
       <a href="/users/upgrade" class="btn btn-danger">Upgrade to Premium</a>
-      <% } %>
       <ul class="list-group">
         <% wikis.forEach((wiki) => { %>
         <li class="list-group-item">
           <p>You need to be a Premium Member to view Private Wikis</p> </a>
         </li>
         <% }) %>
+        <% } %>
       </ul>
     </main>
   </body>
