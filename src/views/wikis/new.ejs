@@ -21,6 +21,9 @@
             aria-describedby="titleHelp"
             placeholder="Enter Title"
           />
+          <small class="text-muted" id="titleHelp"
+            >title must be at least 4 characters</small
+          >
         </div>
         <div class="form-group">
           <label for="body">Wiki body</label>
@@ -30,6 +33,9 @@
             name="body"
             placeholder="Enter Wiki Body"
           ></textarea>
+          <small class="text-muted" id="titleHelp"
+            >body must be at least 8 characters</small
+          >
         </div>
 
         <% if(currentUser.role !== "standard"){ %>
